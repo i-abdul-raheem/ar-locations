@@ -1,12 +1,13 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>AR.js A-Frame Location-based</title>
+    <title>ARHEX - Locations Based AR</title>
     <script src="https://aframe.io/releases/1.3.0/aframe.min.js"></script>
     <script
       type="text/javascript"
       src="https://raw.githack.com/AR-js-org/AR.js/master/three.js/build/ar-threex-location-only.js"
     ></script>
+    <script src="https://unpkg.com/aframe-look-at-component@0.8.0/dist/aframe-look-at-component.min.js"></script>
     <script
       type="text/javascript"
       src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"
@@ -15,28 +16,44 @@
   <body>
     <a-scene
       vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false"
-      renderer="antialias: true; alpha: true"
+      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
     >
-      <a-camera gps-new-camera="gpsMinDistance: 5"></a-camera>
-      <!-- <a-entity
-        material="color: red"
-        geometry="primitive: box"
-        gps-new-entity-place="longitude: 74.3219641; latitude: 31.5214372;"
-        scale="20 20 20"
-      ></a-entity> -->
+      <a-camera
+        gps-camera="minDistance: 1; alert: true"
+        rotation-reader
+      ></a-camera>
       <a-image
+        id="tag1"
         src="tag.png"
-        gps-new-entity-place="longitude: 74.3263757; latitude: 31.5202618;"
-        scale="10 10 10"
+        gps-entity-place="longitude: 74.3209197; latitude: 31.5203401;"
+        scale="75 75 75"
+        look-at="[gps-camera]"
       >
       </a-image>
+      <a-text
+        value="MK Boys Hostel"
+        look-at="[gps-camera]"
+        align="center"
+        id="textmk"
+        scale="25 25 25"
+        gps-entity-place="latitude: 31.5203401; longitude: 74.3209197;"
+      ></a-text>
       <a-image
+        id="tag2"
         src="tag.png"
-        gps-new-entity-place="longitude: 74.3210641; latitude: 31.5204372;"
-        scale="10 10 10"
+        gps-entity-place="longitude: 74.3158142; latitude: 31.522006;"
+        scale="75 75 75"
+        look-at="[gps-camera]"
       >
       </a-image>
+      <a-text
+        value="ConsoleDot"
+        look-at="[gps-camera]"
+        align="center"
+        scale="25 25 25"
+        id="textcd"
+        gps-entity-place="latitude: 31.522006; longitude: 74.3158142;"
+      ></a-text>
     </a-scene>
   </body>
 </html>
