@@ -13,47 +13,88 @@
       src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"
     ></script>
   </head>
-  <body>
-    <a-scene
-      vr-mode-ui="enabled: false"
-      arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
-    >
-      <a-camera
-        gps-camera="minDistance: 1; alert: true"
-        rotation-reader
-      ></a-camera>
-      <a-image
-        id="tag1"
-        src="tag.png"
-        gps-entity-place="longitude: 74.3209197; latitude: 31.5203401;"
-        scale="75 75 75"
-        look-at="[gps-camera]"
-      >
-      </a-image>
-      <a-text
-        value="MK Boys Hostel"
-        look-at="[gps-camera]"
-        align="center"
-        id="textmk"
-        scale="25 25 25"
-        gps-entity-place="latitude: 31.5203401; longitude: 74.3209197;"
-      ></a-text>
-      <a-image
-        id="tag2"
-        src="tag.png"
-        gps-entity-place="longitude: 74.3158142; latitude: 31.522006;"
-        scale="75 75 75"
-        look-at="[gps-camera]"
-      >
-      </a-image>
-      <a-text
-        value="ConsoleDot"
-        look-at="[gps-camera]"
-        align="center"
-        scale="25 25 25"
-        id="textcd"
-        gps-entity-place="latitude: 31.522006; longitude: 74.3158142;"
-      ></a-text>
-    </a-scene>
-  </body>
+  <body id="scene"></body>
+  <script>
+    const data = [
+      {
+        id: 0,
+        name: 'MK Boys Hostel',
+        longitude: '74.3209197',
+        latitude: '31.5203401',
+      },
+      {
+        id: 1,
+        name: 'ConsoleDot',
+        longitude: '74.3250718',
+        latitude: '31.5205472',
+      },
+      {
+        id: 2,
+        name: 'ARHEX Labs',
+        longitude: '74.2901429',
+        latitude: '31.4548944',
+      },
+      {
+        id: 3,
+        name: 'Nauman Yousaf',
+        longitude: '74.2595994',
+        latitude: '31.4022745',
+      },
+      {
+        id: 4,
+        name: 'Hamza Mushtaq',
+        longitude: '74.4045113',
+        latitude: '31.5878945',
+      },
+      {
+        id: 5,
+        name: 'Adeel Amir Butt',
+        longitude: '74.2921611',
+        latitude: '31.530871',
+      },
+      {
+        id: 6,
+        name: 'Haris Siddiqui',
+        longitude: '74.3582605',
+        latitude: '31.51647',
+      },
+      {
+        id: 7,
+        name: 'Shehzad Zafar',
+        longitude: '74.3207015',
+        latitude: '31.5043709',
+      },
+    ];
+    let html = `<a-scene
+        id="scene"
+        vr-mode-ui="enabled: false"
+        arjs="sourceType: webcam; videoTexture: true; debugUIEnabled: false;"
+        >
+        <a-camera
+            gps-camera="minDistance: 1; alert: true"
+            rotation-reader
+        ></a-camera>`;
+    const elem = document.getElementById('scene');
+    for (person of data) {
+      const marker = `<a-image
+            id="tag${person?.id}"
+            src="tag.png"
+            gps-entity-place="longitude: ${person?.longitude}; latitude: ${person?.latitude};"
+            scale="75 75 75"
+            look-at="[gps-camera]"
+            >
+            </a-image>`;
+      const label = `<a-text
+            value="${person?.name}"
+            look-at="[gps-camera]"
+            align="center"
+            scale="25 25 25"
+            id="text${person?.id}"
+            gps-entity-place="latitude: ${person?.latitude}; longitude: ${person?.longitude};"
+            ></a-text>`;
+      html = html + marker + label;
+    }
+    html = html + `</a-scene>`;
+    elem.innerHTML = html;
+  </script>
 </html>
